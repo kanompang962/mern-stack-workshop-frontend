@@ -35,6 +35,7 @@ const Login = ({ history }) => {
 
     useEffect(() => {
         getToken() && history.push('/');
+        // eslint-disable-next-line
     }, [])
 
     return (
