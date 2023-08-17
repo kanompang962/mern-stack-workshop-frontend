@@ -49,31 +49,35 @@ function App() {
     <div className="container p-5">
       <Navbar />
       <div className="">
-        {listData && listData.map((data, index) => (
-          <div className="row" key={index} style={{ borderBottom: '1px solid silver' }}>
-            <div className="col pt-3 pb-2">
-              <a href={`/read/${data.slug}`}>
-                <h2>{data.title}</h2>
-              </a>
-              <p>{parse(data.content.substring(0, 250))}</p>
-              <p className="text-muted">ผู้เขียน: {data.author} เผยแพร่: {new Date(data.createdAt).toLocaleString()}</p>
 
-              {getToken() && (
-                <div>
-                  <a href={`edit/${data.slug}`}
-                    className="btn btn-warning">
-                    แก้ไขบทความ
-                  </a> &nbsp;
-                  <button onClick={() => conFirmDelete(data.slug)}
-                    className="btn btn-danger">
-                    ลบบทความ
-                  </button>
+        {
+          listData.length <= 0
+            ? <div className="d-flex justify-content-center">Loading...</div>
+            : listData.map((data, index) => (
+              <div className="row" key={index} style={{ borderBottom: '1px solid silver' }}>
+                <div className="col pt-3 pb-2">
+                  <a href={`/read/${data.slug}`}>
+                    <h2>{data.title}</h2>
+                  </a>
+                  <p>{parse(data.content.substring(0, 250))}</p>
+                  <p className="text-muted">ผู้เขียน: {data.author} เผยแพร่: {new Date(data.createdAt).toLocaleString()}</p>
+
+                  {getToken() && (
+                    <div>
+                      <a href={`edit/${data.slug}`}
+                        className="btn btn-warning">
+                        แก้ไขบทความ
+                      </a> &nbsp;
+                      <button onClick={() => conFirmDelete(data.slug)}
+                        className="btn btn-danger">
+                        ลบบทความ
+                      </button>
+                    </div>
+                  )}
                 </div>
-              )}
-            </div>
 
-          </div>
-        ))}
+              </div>
+            ))}
       </div>
     </div>
   );
